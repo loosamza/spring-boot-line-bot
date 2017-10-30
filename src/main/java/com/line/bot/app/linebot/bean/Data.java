@@ -3,7 +3,7 @@ package com.line.bot.app.linebot.bean;
 public class Data {
 	
 	private String replyToken;
-	private Message message;
+	private Message messages;
 
 	public String getReplyToken() {
 		return replyToken;
@@ -13,12 +13,14 @@ public class Data {
 		this.replyToken = replyToken;
 	}
 
-	public Message getMessage() {
-		return message;
+	public Message getMessages() {
+		return messages;
 	}
 
-	public void setMessage(Message message) {
-		this.message = message;
+	public void setMessages(Message messages) {
+		this.messages = messages;
 	}
+
+	
 
 }

@@ -44,14 +44,14 @@ public class RootController {
 		String txt = "";
 		String replyToken = "";
 		String result = "";
-		Message replyMsg = null;
-		Data data = null;
+		Message replyMsg = new Message();
+		Data data = new Data();
 		for (Events ev : events.getEvents()) {
-			if (ev.getMessage().equals("text")) {
+			if (ev.getMessage().getType().equals("text")) {
 				replyMsg.setText(ev.getMessage().getText());
 				replyMsg.setType("text");
 				
-				data.setMessage(replyMsg);
+				data.setMessages(replyMsg);
 				data.setReplyToken(ev.getReplyToken());
 				
 				OkHttpClient client = new OkHttpClient();
