@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.line.bot.app.linebot.bean.Data;
 import com.line.bot.app.linebot.bean.Events;
 import com.line.bot.app.linebot.bean.Message;
 import com.line.bot.app.linebot.bean.WebHookBean;
@@ -44,16 +45,19 @@ public class RootController {
 		String replyToken = "";
 		String result = "";
 		Message replyMsg = null;
+		Data data = null;
 		for (Events ev : events.getEvents()) {
 			if (ev.getMessage().equals("text")) {
 				replyMsg.setText(ev.getMessage().getText());
 				replyMsg.setType("text");
-
+				
+				data.setMessage(replyMsg);
+				data.setReplyToken(ev.getReplyToken());
+				
 				OkHttpClient client = new OkHttpClient();
-
 				MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
 				Gson g = new Gson();
-				String json = g.toJson(replyMsg);
+				String json = g.toJson(data);
 				RequestBody body = RequestBody.create(mediaType, json);
 				Request request = new Request.Builder().url("https://api.line.me/v2/bot/message/reply").post(body)
 						.addHeader("content-type", "application/json").addHeader("cache-control", "no-cache")
