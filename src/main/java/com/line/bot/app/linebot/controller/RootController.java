@@ -25,6 +25,12 @@ public class RootController {
 
 	@RequestMapping("/")
 	String home() {
+		System.out.println("Hello, logs!");
+		System.out.println("Hello, logs!");
+		System.out.println("Hello, logs!");
+		System.out.println("Hello, logs!");
+		System.out.println("Hello, logs!");
+		System.out.println("Hello, logs!");
 		return "Hello World!";
 	}
 
