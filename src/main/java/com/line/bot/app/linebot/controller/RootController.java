@@ -1,7 +1,6 @@
 package com.line.bot.app.linebot.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,13 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.line.bot.app.linebot.bean.Events;
-import com.line.bot.app.linebot.bean.WebHookBean;
-import com.sun.xml.internal.messaging.saaj.util.Base64;
+
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 @RestController
