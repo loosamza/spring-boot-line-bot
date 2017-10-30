@@ -31,7 +31,7 @@ public class RootController {
 	@RequestMapping(value = "/bot", method = RequestMethod.POST, consumes = "text/plain")
 	@ResponseBody
 	String bot(@org.springframework.web.bind.annotation.RequestBody List<Events> events) {
-		
+		System.out.println("Message ===> " + events.get(0).getMessage().getText());
 		return events.get(0).getMessage().getText();
 	}
 
