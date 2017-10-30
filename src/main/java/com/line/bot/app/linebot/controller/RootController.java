@@ -1,6 +1,7 @@
 package com.line.bot.app.linebot.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -44,16 +45,20 @@ public class RootController {
 		String txt = "";
 		String replyToken = "";
 		String result = "";
-		Message replyMsg = new Message();
+		List<Message> replyMsgList = new ArrayList<Message>();
+		Message msg = new Message();
 		Data data = new Data();
 		for (Events ev : events.getEvents()) {
 			if (ev.getMessage().getType().equals("text")) {
-				replyMsg.setText(ev.getMessage().getText());
-				replyMsg.setType("text");
-				
-				data.setMessages(replyMsg);
+				msg.setText("โย่วววววว นี่คือการตอบกลับอัตโนมือ xD");
+				msg.setType("text");
+				replyMsgList.add(msg);
+				msg.setText(ev.getMessage().getText());
+				msg.setType("text");
+				replyMsgList.add(msg);
+				data.setMessages(replyMsgList);
 				data.setReplyToken(ev.getReplyToken());
-				
+
 				OkHttpClient client = new OkHttpClient();
 				MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
 				Gson g = new Gson();

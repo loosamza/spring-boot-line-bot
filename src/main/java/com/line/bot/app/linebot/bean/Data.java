@@ -1,9 +1,11 @@
 package com.line.bot.app.linebot.bean;
 
+import java.util.List;
+
 public class Data {
 	
 	private String replyToken;
-	private Message messages;
+	private List<Message> messages;
 
 	public String getReplyToken() {
 		return replyToken;
@@ -13,13 +15,15 @@ public class Data {
 		this.replyToken = replyToken;
 	}
 
-	public Message getMessages() {
+	public List<Message> getMessages() {
 		return messages;
 	}
 
-	public void setMessages(Message messages) {
+	public void setMessages(List<Message> messages) {
 		this.messages = messages;
 	}
+
+	
 
 	
 
