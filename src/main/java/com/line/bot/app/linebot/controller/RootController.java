@@ -46,13 +46,15 @@ public class RootController {
 		String replyToken = "";
 		String result = "";
 		List<Message> replyMsgList = new ArrayList<Message>();
+		Message msg1 = new Message();
 		Message msg = new Message();
 		Data data = new Data();
 		for (Events ev : events.getEvents()) {
 			if (ev.getMessage().getType().equals("text")) {
-				msg.setText("โย่วววววว นี่คือการตอบกลับอัตโนมือ xD");
-				msg.setType("text");
-				replyMsgList.add(msg);
+				
+				msg1.setText("โย่วววววว นี่คือการตอบกลับอัตโนมือ xD");
+				msg1.setType("text");
+				replyMsgList.add(msg1);
 				msg.setText(ev.getMessage().getText());
 				msg.setType("text");
 				replyMsgList.add(msg);
