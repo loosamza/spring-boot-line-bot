@@ -37,7 +37,7 @@ public class UploadImageToCloudServiceImpl implements UploadImageToCloudService 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(uploadResult.get("url").toString());
+		System.out.println(uploadResult.get("secure_url").toString());
 		return uploadResult;
 	}
 

@@ -81,7 +81,7 @@ public class RootController {
 							resultMap = uploadImageToCloudService.uploadImage(bytes);
 						}
 
-						String imgURL = (String) resultMap.get("url");
+						String imgURL = (String) resultMap.get("secure_url");
 						msg.setOriginalContentUrl(imgURL);
 						msg.setPreviewImageUrl(imgURL);
 						replyMsgList.add(msg);
