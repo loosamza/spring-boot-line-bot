@@ -3,7 +3,9 @@ package com.line.bot.app.linebot.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,8 @@ import com.line.bot.app.linebot.bean.Data;
 import com.line.bot.app.linebot.bean.Events;
 import com.line.bot.app.linebot.bean.Message;
 import com.line.bot.app.linebot.bean.WebHookBean;
+import com.line.bot.app.linebot.service.interfaces.TextToImageService;
+import com.line.bot.app.linebot.service.interfaces.UploadImageToCloudService;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -27,6 +31,11 @@ public class RootController {
 
 	@Value("${line.access_token}")
 	private String access_token;
+
+	@Autowired
+	private TextToImageService textToImageService;
+	@Autowired
+	private UploadImageToCloudService uploadImageToCloudService;
 
 	@RequestMapping("/")
 	String home() {
@@ -41,7 +50,7 @@ public class RootController {
 
 	@RequestMapping(value = "/bot", method = RequestMethod.POST)
 	@ResponseBody
-	String bot(@org.springframework.web.bind.annotation.RequestBody WebHookBean events) {
+	String bot(@org.springframework.web.bind.annotation.RequestBody WebHookBean events) throws IOException {
 		String txt = "";
 		String replyToken = "";
 		String result = "";
@@ -51,15 +60,44 @@ public class RootController {
 		Data data = new Data();
 		for (Events ev : events.getEvents()) {
 			if (ev.getMessage().getType().equals("text")) {
-				
-				msg1.setText("โย่วววววว นี่คือการตอบกลับอัตโนมือ xD");
-				msg1.setType("text");
-				replyMsgList.add(msg1);
-				msg.setText(ev.getMessage().getText());
-				msg.setType("text");
-				replyMsgList.add(msg);
-				data.setMessages(replyMsgList);
-				data.setReplyToken(ev.getReplyToken());
+				String rMsg = ev.getMessage().getText();
+				if (rMsg.contains(" ")) {
+					String splitMsg[] = rMsg.split(" ");
+
+					if (splitMsg[0].equalsIgnoreCase("-image") || splitMsg[0].equalsIgnoreCase("-รูป")) {
+						msg1.setText("โย่วววววว นี่คือการตอบกลับอัตโนมือ xD อยากได้รูปหราาาา จัดปายยย");
+						msg1.setType("text");
+						replyMsgList.add(msg1);
+						msg.setType("image");
+						rMsg = rMsg.replace("-รูป", "").replace("-image", "");
+						byte[] bytes = textToImageService.textToimage(rMsg.substring(0, 10));
+						Map resultMap = uploadImageToCloudService.uploadImage(bytes);
+						String imgURL = (String) resultMap.get("url");
+						msg.setOriginalContentUrl(imgURL);
+						msg.setPreviewImageUrl(imgURL);
+						replyMsgList.add(msg);
+						data.setMessages(replyMsgList);
+						data.setReplyToken(ev.getReplyToken());
+					} else {
+						msg1.setText("โย่วววววว นี่คือการตอบกลับอัตโนมือ xD");
+						msg1.setType("text");
+						replyMsgList.add(msg1);
+						msg.setText(ev.getMessage().getText());
+						msg.setType("text");
+						replyMsgList.add(msg);
+						data.setMessages(replyMsgList);
+						data.setReplyToken(ev.getReplyToken());
+					}
+				} else {
+					msg1.setText("โย่วววววว นี่คือการตอบกลับอัตโนมือ xD");
+					msg1.setType("text");
+					replyMsgList.add(msg1);
+					msg.setText(ev.getMessage().getText());
+					msg.setType("text");
+					replyMsgList.add(msg);
+					data.setMessages(replyMsgList);
+					data.setReplyToken(ev.getReplyToken());
+				}
 
 				OkHttpClient client = new OkHttpClient();
 				MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
