@@ -2,6 +2,7 @@ package com.line.bot.app.linebot.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,8 +71,16 @@ public class RootController {
 						replyMsgList.add(msg1);
 						msg.setType("image");
 						rMsg = rMsg.replace("-รูป", "").replace("-image", "");
-						byte[] bytes = textToImageService.textToimage(rMsg.substring(0, 10));
-						Map resultMap = uploadImageToCloudService.uploadImage(bytes);
+						Map resultMap = new HashMap<String, String>();
+						if (rMsg.trim().length() == 0) {
+							byte[] bytes = textToImageService.textToimage("ไหนละข้อความ ??");
+							resultMap = uploadImageToCloudService.uploadImage(bytes);
+						} else {
+							byte[] bytes = textToImageService
+									.textToimage(rMsg.substring(0, (rMsg.length() < 10) ? rMsg.length() : 10));
+							resultMap = uploadImageToCloudService.uploadImage(bytes);
+						}
+
 						String imgURL = (String) resultMap.get("url");
 						msg.setOriginalContentUrl(imgURL);
 						msg.setPreviewImageUrl(imgURL);
