@@ -30,16 +30,18 @@ public class TextToImageServiceImpl implements TextToImageService {
 		int width = 400;
 		BufferedImage bufferedImage = new BufferedImage(height, width, BufferedImage.TYPE_INT_RGB);
 		Graphics2D  graphics = (Graphics2D) bufferedImage.getGraphics();
-		graphics.setBackground(Color.WHITE);
-		graphics.setColor(Color.BLUE);
-		graphics.fillRect(0, 350, width, 50);
-		graphics.setColor(Color.WHITE);	
-		graphics.setFont(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(35f));
-		FontMetrics metrics = graphics.getFontMetrics(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(35f));
+		graphics.setColor(Color.WHITE);
+		graphics.fillRect(0, 0, height, width);
+		graphics.setColor(Color.BLACK);	
+		graphics.setFont(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(30f));
+		FontMetrics metrics = graphics.getFontMetrics(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(30f));
 		int x = (height - metrics.stringWidth(key)) / 2;
 		int y = ((width - metrics.getHeight()) / 2) + metrics.getAscent();
 		graphics.drawString(key, x, y);
-		
+		graphics.setColor(Color.CYAN);
+		graphics.fillRect(0, 0 ,width ,50 );
+		graphics.setColor(Color.CYAN);
+		graphics.fillRect(0, 350 ,width ,50 );
 		Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("png");
 		ImageWriter writer = writers.next();
 
