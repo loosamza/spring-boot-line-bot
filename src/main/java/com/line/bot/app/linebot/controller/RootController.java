@@ -70,7 +70,7 @@ public class RootController {
 						msg1.setType("text");
 						replyMsgList.add(msg1);
 						msg.setType("image");
-						rMsg = rMsg.replace("-รูป", "").replace("-image", "");
+						rMsg = rMsg.replace("-รูป", "").replaceAll("(?i)-image", "");
 						Map resultMap = new HashMap<String, String>();
 						if (rMsg.trim().length() == 0) {
 							byte[] bytes = textToImageService.textToimage("ไหนละข้อความ ??");
