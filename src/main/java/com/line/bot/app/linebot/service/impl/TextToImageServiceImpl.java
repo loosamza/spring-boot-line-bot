@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,13 +29,15 @@ public class TextToImageServiceImpl implements TextToImageService {
 		
 		int height = 400;
 		int width = 400;
+		String waterProve = "(^__^)~* by scOnTz";
 		BufferedImage bufferedImage = new BufferedImage(height, width, BufferedImage.TYPE_INT_RGB);
 		Graphics2D  graphics = (Graphics2D) bufferedImage.getGraphics();
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(0, 0, height, width);
 		graphics.setColor(Color.BLACK);	
-		graphics.setFont(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(30f));
-		FontMetrics metrics = graphics.getFontMetrics(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(30f));
+		graphics.setFont(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(34f));
+		FontMetrics metrics = graphics.getFontMetrics(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(34f));
 		int x = (height - metrics.stringWidth(key)) / 2;
 		int y = ((width - metrics.getHeight()) / 2) + metrics.getAscent();
 		graphics.drawString(key, x, y);
@@ -42,7 +45,14 @@ public class TextToImageServiceImpl implements TextToImageService {
 		graphics.fillRect(0, 0 ,width ,50 );
 		graphics.setColor(Color.CYAN);
 		graphics.fillRect(0, 350 ,width ,50 );
+		graphics.setFont(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(20f));
+		graphics.setColor(Color.BLACK);	
+		metrics = graphics.getFontMetrics(DemoFonts.getFont("SanamDeklen_chaya.ttf").deriveFont(20f));
+		int actual_width = graphics.getFontMetrics().stringWidth(waterProve);
+		x = width - actual_width - 20;
+		graphics.drawString(waterProve, x, height-10);
 		Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("png");
+		//(￣▽￣)~*
 		ImageWriter writer = writers.next();
 
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();

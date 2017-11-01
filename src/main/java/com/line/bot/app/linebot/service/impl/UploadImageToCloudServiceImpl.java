@@ -41,4 +41,12 @@ public class UploadImageToCloudServiceImpl implements UploadImageToCloudService 
 		return uploadResult;
 	}
 
+	@Override
+	public boolean deleteImage(String public_id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+
 }

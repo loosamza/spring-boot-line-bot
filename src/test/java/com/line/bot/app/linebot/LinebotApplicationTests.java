@@ -26,7 +26,7 @@ public class LinebotApplicationTests {
 	@Test
 	public void testTextToImageService() throws IOException{
 //		uploadImageToCloudService.uploadImage(textToImageService.textToimage());
-//		textToImageService.byteToFile(textToImageService.textToimage("สวัสดีครับ"));
+		//textToImageService.byteToFile(textToImageService.textToimage("สวัสดีครับ"));
 		
 	}
 
