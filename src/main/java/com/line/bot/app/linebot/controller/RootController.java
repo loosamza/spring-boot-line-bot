@@ -77,7 +77,7 @@ public class RootController {
 							resultMap = uploadImageToCloudService.uploadImage(bytes);
 						} else {
 							byte[] bytes = textToImageService
-									.textToimage(rMsg.substring(0, (rMsg.length() < 20) ? rMsg.length() : 20));
+									.textToimage(rMsg.substring(0, (rMsg.length() < 28) ? rMsg.length() : 28));
 							resultMap = uploadImageToCloudService.uploadImage(bytes);
 						}
 
