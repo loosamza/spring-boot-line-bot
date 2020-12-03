@@ -92,14 +92,19 @@ public class RootController {
                 System.out.println("Request : " + Arrays.asList("!b Hello", "!b สวัสดี").contains(rMsg));
 
                 if (Arrays.asList("!b Hello", "!b สวัสดี").contains(rMsg)) {
-                    int rand = new Random().nextInt(packageList.size());
-                    msg1.setType("sticker");
-                    msg1.setPackageId(Long.parseLong(packageList.get(rand).split(":")[0]));
-                    msg1.setStickerId(Long.parseLong(packageList.get(rand).split(":")[1]));
-                    replyMsgList.add(msg1);
-                    data.setMessages(replyMsgList);
-                    data.setReplyToken(ev.getReplyToken());
-                    lineWSService.callLineWSReply(data);
+                    try {
+                        int rand = new Random().nextInt(packageList.size());
+                        msg1.setType("sticker");
+                        msg1.setPackageId(Long.parseLong(packageList.get(rand).split(":")[0]));
+                        msg1.setStickerId(Long.parseLong(packageList.get(rand).split(":")[1]));
+                        replyMsgList.add(msg1);
+                        data.setMessages(replyMsgList);
+                        data.setReplyToken(ev.getReplyToken());
+                        lineWSService.callLineWSReply(data);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                     return;
                 }
             }

@@ -24,6 +24,7 @@ public class LineWSServiceImpl implements LineWSService {
         try {
             String json = g.toJson(req);
             RequestBody body = RequestBody.create(mediaType, json);
+            System.out.println("Request" + g.toJson(body));
             Request request = new Request.Builder().url("https://api.line.me/v2/bot/message/reply").post(body)
                     .addHeader("content-type", "application/json").addHeader("cache-control", "no-cache")
                     .addHeader("postman-token", "ec35ea6c-381c-12ad-4725-6821a25890ae")
@@ -31,6 +32,7 @@ public class LineWSServiceImpl implements LineWSService {
 
 
             response = client.newCall(request).execute();
+            System.out.println("Response "  + g.toJson(response));
 
         } catch (Exception e) {
             e.printStackTrace();
