@@ -59,6 +59,7 @@ public class RootController {
         for (Events ev : events.getEvents()) {
             if (ev.getMessage().getType().equals("text")) {
                 String rMsg = ev.getMessage().getText();
+                System.out.println("Request : " + rMsg);
                 if (Arrays.asList("-image", "-รูป").contains(rMsg)) {
                     String splitMsg[] = rMsg.split(" ");
                     if (splitMsg.length < 2) return;
