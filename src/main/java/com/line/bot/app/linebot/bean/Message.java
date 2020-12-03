@@ -6,6 +6,8 @@ public class Message {
 	private String text;
 	private String originalContentUrl;
 	private String previewImageUrl;
+	private Long packageId;
+	private Long stickerId;
 
 	public String getId() {
 		return id;
@@ -47,4 +49,19 @@ public class Message {
 		this.previewImageUrl = previewImageUrl;
 	}
 
+	public Long getPackageId() {
+		return packageId;
+	}
+
+	public void setPackageId(Long packageId) {
+		this.packageId = packageId;
+	}
+
+	public Long getStickerId() {
+		return stickerId;
+	}
+
+	public void setStickerId(Long stickerId) {
+		this.stickerId = stickerId;
+	}
 }
